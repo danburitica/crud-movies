@@ -51,19 +51,6 @@ export class MovieController {
         });
   }
 
-  @Delete('/:movieID')
-  async deleteMovie(@Res() res, @Param('movieID') movieID) {
-    const deletedMovie = await this.movieService.deleteMovie(movieID);
-    deletedMovie
-      ? res.status(HttpStatus.OK).json({
-          message: 'Success',
-          deletedMovie,
-        })
-      : res.status(HttpStatus.NOT_FOUND).json({
-          message: 'Sorry, no movie found',
-        });
-  }
-
   @Put('/:movieID')
   async updateMovie(
     @Res() res,
@@ -78,6 +65,19 @@ export class MovieController {
       ? res.status(HttpStatus.OK).json({
           message: 'Success',
           updatedMovie,
+        })
+      : res.status(HttpStatus.NOT_FOUND).json({
+          message: 'Sorry, no movie found',
+        });
+  }
+
+  @Delete('/:movieID')
+  async deleteMovie(@Res() res, @Param('movieID') movieID) {
+    const deletedMovie = await this.movieService.deleteMovie(movieID);
+    deletedMovie
+      ? res.status(HttpStatus.OK).json({
+          message: 'Success',
+          deletedMovie,
         })
       : res.status(HttpStatus.NOT_FOUND).json({
           message: 'Sorry, no movie found',
