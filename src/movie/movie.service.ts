@@ -74,7 +74,9 @@ export class MovieService {
         },
       });
 
-      const detailsMovies = this.getDetailsMoviesFromApi(topMoviesApi);
+      const detailsMovies = this.getDetailsMoviesFromApi(
+        topMoviesApi.splice(0, 10),
+      );
 
       (await detailsMovies).forEach((movie) =>
         this.createMovie({

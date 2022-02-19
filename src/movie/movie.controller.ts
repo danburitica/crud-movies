@@ -34,10 +34,7 @@ export class MovieController {
     try {
       const movies = await this.movieService.getMovies();
       movies.length
-        ? res.status(HttpStatus.OK).json({
-            message: 'Success',
-            movies,
-          })
+        ? res.status(HttpStatus.OK).json(movies)
         : res.status(HttpStatus.NOT_FOUND).json({
             message: 'Sorry, no movies found',
           });
@@ -51,10 +48,7 @@ export class MovieController {
     try {
       const movie = await this.movieService.getMovie(movieID);
       movie
-        ? res.status(HttpStatus.OK).json({
-            message: 'Success',
-            movie,
-          })
+        ? res.status(HttpStatus.OK).json(movie)
         : res.status(HttpStatus.NOT_FOUND).json({
             message: 'Sorry, no movie found',
           });
