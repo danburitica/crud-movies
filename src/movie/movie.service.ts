@@ -83,6 +83,7 @@ export class MovieService {
           title: movie.title,
           titleType: movie.titleType,
           year: movie.year,
+          runningTimeInMinutes: movie.runningTimeInMinutes,
         }),
       );
 
@@ -92,21 +93,21 @@ export class MovieService {
     }
   }
 
-  async getDetailsMoviesFromApi(moviesApi): Promise<any[]> {
+  async getDetailsMoviesFromApi(moviesApi: string[]): Promise<Movie[]> {
     const detailsMovies = [];
     for (let i = 0; i < moviesApi.length; i++) {
       try {
         const { data: detailsMovie } = await axios.get(
-          `https://imdb8.p.rapidapi.com/title/get-details`,
+          `${process.env.API_URL_DETAILS}`,
           {
             params: { tconst: moviesApi[i].split('/')[2] },
             headers: {
-              'x-rapidapi-host': 'imdb8.p.rapidapi.com',
-              'x-rapidapi-key':
-                '2a58b5e542msh076c7ded954eea3p1d16b5jsnf9bd76edd1db',
+              'x-rapidapi-host': `${process.env.API_HOST}`,
+              'x-rapidapi-key': `${process.env.API_KEY}`,
             },
           },
         );
+
         detailsMovies.push(detailsMovie);
       } catch (error) {
         console.error(error);
